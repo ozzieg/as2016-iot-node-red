@@ -21,6 +21,7 @@
     "node-red-node-mongodb": "0.x",
     "node-red-contrib-elasticsearch-jd": "0.0.x",
     "node-red-contrib-salesforce": "0.0.x",
+    "node-red-contrib-postgres": "0.x",
     "node-red-contrib-librato": "3.0.2"
   }
 }
