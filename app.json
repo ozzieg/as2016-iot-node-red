@@ -18,5 +18,5 @@
       "description": "Flow editor password."
     }
   },
-  "addons": [ "mongolab", "searchbox" ]
+  "addons": [ "mongolab:sandbox", "searchbox", "cloudmqtt:cat", "heroku-postgresql:hobby-dev", "herokuconnect:demo" ]
 }
