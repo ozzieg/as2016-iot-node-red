@@ -17,6 +17,7 @@
 var mongo = require('mongodb');
 var when = require('when');
 var util = require('util');
+var fs = require('fs');
 
 var settings;
 
@@ -165,7 +166,9 @@ function getFlows() {
                 if (doc && doc.flow) {
                     defer.resolve(doc.flow);
                 } else {
-                    defer.resolve([]);
+                    //load default flow
+                    var flow = JSON.parse(fs.readFileSync('./default/flow.json','utf8'));
+                    defer.resolve(flow);
                 }
             }
         })
