@@ -1,7 +1,7 @@
 {
   "name": "Advisory Summit 2016 IoT Cloud",
   "description": "A Node-RED instance for Heroku with pre-installed Salesforce, Particle, MongoDB, and MQTT nodes.",
-  "repository": "https://github.com/ozzieg/node-red-salesforce",
+  "repository": "https://github.com/ozzieg/as2016-iot-node-red",
   "keywords": [
     "Node-RED",
     "Salesforce",
