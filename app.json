@@ -19,30 +19,37 @@
     },
     "MQTT_URL": {
       "description": "Copy Hostname from CLOUDMQTT_URL Config Variable including username and password (leave out mqtt:// and port number at the end)",
+      "value": "user:pass@host.cloudmqtt.com",
       "required": false
     },
     "MONGODB_URL": {
       "description": "Copy Hostname from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>) including the username and password (leave out mongodb://, port number, and database name` at the end)",
+      "value": "user:pass@host.mlab.com",
       "required": false
     },
     "MONGODB_PORT": {
       "description": "Copy Port number from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>)",
+      "value": "12345",
       "required": false
     },
     "MONGODB_DATABASE": {
       "description": "Copy Database Name from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>",
+      "value": "dbname",
       "required": false
     },
     "PARTICLE_DEVICE_ID": {
       "description": "Copy Device Id (24-digit alphanumeric) from command prompt by running 'particle list'",
+      "value": "123456789012345678901234",
       "required": false
     },
     "SALESFORCE_USERNAME": {
       "description": "Enter Salesforce Username from Developer/Production Org",
+      "value": "user@user.org",
       "required": false
     },
     "SALESFORCE_CONSUMER_KEY": {
       "description": "Enter Connected App (need to create one) Consumer Key from Developer/Production Org",
+      "value": "ABCDEFGHIJ",
       "required": false
     }
   },
