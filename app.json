@@ -18,25 +18,32 @@
       "description": "Flow editor password."
     },
     "MQTT_URL": {
-      "description": "Copy Hostname from CLOUDMQTT_URL Config Variable including username and password (leave out mqtt:// and port number at the end)"
+      "description": "Copy Hostname from CLOUDMQTT_URL Config Variable including username and password (leave out mqtt:// and port number at the end)",
+      "required": false
     },
     "MONGODB_URL": {
-      "description": "Copy Hostname from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>) including the username and password (leave out mongodb://, port number, and database name` at the end)"
+      "description": "Copy Hostname from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>) including the username and password (leave out mongodb://, port number, and database name` at the end)",
+      "required": false
     },
     "MONGODB_PORT": {
-      "description": "Copy Port number from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>)"
+      "description": "Copy Port number from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>)",
+      "required": false
     },
     "MONGODB_DATABASE": {
-      "description": "Copy Database Name from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>"
+      "description": "Copy Database Name from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>",
+      "required": false
     },
     "PARTICLE_DEVICE_ID": {
-      "description": "Copy Device Id (24-digit alphanumeric) from command prompt by running 'particle list'"
+      "description": "Copy Device Id (24-digit alphanumeric) from command prompt by running 'particle list'",
+      "required": false
     },
     "SALESFORCE_USERNAME": {
-      "description": "Enter Salesforce Username from Developer/Production Org"
+      "description": "Enter Salesforce Username from Developer/Production Org",
+      "required": false
     },
     "SALESFORCE_CONSUMER_KEY": {
-      "description": "Enter Connected App (need to create one) Consumer Key from Developer/Production Org"
+      "description": "Enter Connected App (need to create one) Consumer Key from Developer/Production Org",
+      "required": false
     }
   },
   "addons": [ "mongolab:sandbox", "searchbox", "cloudmqtt:cat", "heroku-postgresql:hobby-dev", "herokuconnect:demo" ]
