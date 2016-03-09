@@ -167,7 +167,7 @@ function getFlows() {
                     defer.resolve(doc.flow);
                 } else {
                     //load default flow
-                    var flow = JSON.parse(fs.readFileSync('./default/flow.json','utf8'));
+                    var flow = JSON.parse(fs.readFileSync('./defaults/flow.json','utf8'));
                     defer.resolve(flow);
                 }
             }
