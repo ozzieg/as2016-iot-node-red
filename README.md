@@ -20,7 +20,7 @@ A fork from [node-red-heroku](https://github.com/joeartsea/) as it use MongoDB t
 
 Deploy this app to Heroku for free and have it up and running in a matter of minutes.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/ozzieg/node-red-salesforce)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/ozzieg/as2016-iot-node-red)
 
 ### Flow Editor Credentials
 
