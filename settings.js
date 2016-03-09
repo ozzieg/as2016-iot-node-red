@@ -40,7 +40,7 @@ var settings = module.exports = {
     httpStatic: path.join(__dirname,"public"),
 
     functionGlobalContext: { 
-      process: require('process')
+      process: process
     },
 
     storageModule: require("./mongostorage")
