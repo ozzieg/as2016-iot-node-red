@@ -1,7 +1,7 @@
 {
-  "name": "Node-RED Salesforce",
-  "description": "A Node-RED instance for Heroku with pre-installed Salesforce nodes.",
-  "repository": "https://github.com/jeffdonthemic/node-red-salesforce",
+  "name": "Advisory Summit 2016 IoT Cloud",
+  "description": "A Node-RED instance for Heroku with pre-installed Salesforce, Particle, MongoDB, and MQTT nodes.",
+  "repository": "https://github.com/ozzieg/node-red-salesforce",
   "keywords": [
     "Node-RED",
     "Salesforce",
@@ -16,6 +16,27 @@
     },
     "NODE_RED_PASSWORD": {
       "description": "Flow editor password."
+    },
+    "MQTT_URL": {
+      "description": "Copy Hostname from CLOUDMQTT_URL Config Variable including username and password (leave out mqtt:// and port number at the end)"
+    },
+    "MONGODB_URL": {
+      "description": "Copy Hostname from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>) including the username and password (leave out mongodb://, port number, and database name` at the end)"
+    },
+    "MONGODB_PORT": {
+      "description": "Copy Port number from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>)"
+    },
+    "MONGODB_DATABASE": {
+      "description": "Copy Database Name from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>"
+    },
+    "PARTICLE_DEVICE_ID": {
+      "description": "Copy Device Id (24-digit alphanumeric) from command prompt by running 'particle list'"
+    },
+    "SALESFORCE_USERNAME": {
+      "description": "Enter Salesforce Username from Developer/Production Org"
+    },
+    "SALESFORCE_CONSUMER_KEY": {
+      "description": "Enter Connected App (need to create one) Consumer Key from Developer/Production Org"
     }
   },
   "addons": [ "mongolab:sandbox", "searchbox", "cloudmqtt:cat", "heroku-postgresql:hobby-dev", "herokuconnect:demo" ]
