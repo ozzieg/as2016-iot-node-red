@@ -13,11 +13,13 @@
   "env": {
     "NODE_RED_USERNAME": {
       "description": "Flow editor username",
-      "value": "User"
+      "value": "User",
+      "required": false
     },
     "NODE_RED_PASSWORD": {
       "description": "Flow editor password.",
-      "password": "Pass"
+      "value": "Pass",
+      "required": false
     },
     "MQTT_URL": {
       "description": "Copy Hostname from CLOUDMQTT_URL Config Variable including username and password (leave out mqtt:// and port number at the end)",
