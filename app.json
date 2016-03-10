@@ -16,7 +16,7 @@
       "value": "User"
     },
     "NODE_RED_PASSWORD": {
-      "description": "Flow editor password."
+      "description": "Flow editor password.",
       "password": "Pass"
     },
     "MQTT_URL": {
