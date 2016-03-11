@@ -21,18 +21,28 @@
       "value": "Pass",
       "required": false
     },
+    "POSTGRESDB_URL": {
+      "description": "Copy Hostname from DATABASE_URL Config Variable (postgres://<username>:password@<hostname>:<port>/<database-name>) leaving out the username and password (leave out postgres://, port number, and database name` at the end)",
+      "value": "user:pass@host.mlab.com",
+      "required": false
+    },
+    "POSTGRESDB_DATABASE": {
+      "description": "Copy Database Name from DATABASE_URL Config Variable (postgres://<hostname>:<port>/<database-name>",
+      "value": "dbname",
+      "required": false
+    },
     "MONGODB_URL": {
-      "description": "Copy Hostname from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>) including the username and password (leave out mongodb://, port number, and database name` at the end)",
+      "description": "Copy Hostname from MONGOLAB_URI Config Variable (mongodb://<hostname>:<port>/<database-name>) including the username and password (leave out mongodb://, port number, and database name` at the end)",
       "value": "user:pass@host.mlab.com",
       "required": false
     },
     "MONGODB_PORT": {
-      "description": "Copy Port number from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>)",
+      "description": "Copy Port number from MONGOLAB_URI Config Variable (mongodb://<hostname>:<port>/<database-name>)",
       "value": "12345",
       "required": false
     },
     "MONGODB_DATABASE": {
-      "description": "Copy Database Name from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>",
+      "description": "Copy Database Name from MONGOLAB_URI Config Variable (mongodb://<hostname>:<port>/<database-name>",
       "value": "dbname",
       "required": false
     },
@@ -41,16 +51,6 @@
       "value": "123456789012345678901234",
       "required": false
     },
-    "SALESFORCE_USERNAME": {
-      "description": "Enter Salesforce Username from Developer/Production Org",
-      "value": "user@user.org",
-      "required": false
-    },
-    "SALESFORCE_CONSUMER_KEY": {
-      "description": "Enter Connected App (need to create one) Consumer Key from Developer/Production Org",
-      "value": "ABCDEFGHIJ",
-      "required": false
-    }
   },
   "addons": [ "mongolab:sandbox", "searchbox", "cloudmqtt:cat", "heroku-postgresql:hobby-dev", "herokuconnect:demo" ]
 }
