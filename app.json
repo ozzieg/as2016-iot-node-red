@@ -23,7 +23,7 @@
     },
     "POSTGRESDB_URL": {
       "description": "Copy Hostname from DATABASE_URL Config Variable (postgres://<username>:password@<hostname>:<port>/<database-name>) leaving out the username and password (leave out postgres://, port number, and database name` at the end)",
-      "value": "user:pass@host.mlab.com",
+      "value": "host.amazonaws.com",
       "required": false
     },
     "POSTGRESDB_DATABASE": {
