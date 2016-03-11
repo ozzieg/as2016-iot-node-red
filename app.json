@@ -50,7 +50,7 @@
       "description": "Copy Device Id (24-digit alphanumeric) from command prompt by running 'particle list'",
       "value": "123456789012345678901234",
       "required": false
-    },
+    }
   },
   "addons": [ "mongolab:sandbox", "searchbox", "cloudmqtt:cat", "heroku-postgresql:hobby-dev", "herokuconnect:demo" ]
 }
