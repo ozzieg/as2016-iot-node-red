@@ -21,11 +21,6 @@
       "value": "Pass",
       "required": false
     },
-    "MQTT_URL": {
-      "description": "Copy Hostname from CLOUDMQTT_URL Config Variable including username and password (leave out mqtt:// and port number at the end)",
-      "value": "user:pass@host.cloudmqtt.com",
-      "required": false
-    },
     "MONGODB_URL": {
       "description": "Copy Hostname from MONGOLAB_URI Config Variable (mqtt://<hostname>:<port>/<database-name>) including the username and password (leave out mongodb://, port number, and database name` at the end)",
       "value": "user:pass@host.mlab.com",
