@@ -1,5 +1,5 @@
 var mongodb = require('mongodb').MongoClient;
-var url = process.env.MONGOLAB_URI||'mongodb://heroku_d4frfm6w:p1tje6k1l78fm879dk900nhh5j@ds023468.mlab.com:23468/heroku_d4frfm6w';
+var url = process.env.MONGOLAB_URI||(process.argv.length > 2 ? process.argv[2] : 'Provide URL on command line or set MONGOLAB_URI');
 
 var fs = require('fs');
 
@@ -11,9 +11,10 @@ mongodb.connect(url, function(err, db) {
 	    {}, 
 	    {"flow":1}, 
 	    function(err, doc) {
-    		var flows = doc.flow;
+     		if(err) return console.error(err);
+	   		var flows = doc.flow;
     		console.log(flows);
-    		fs.writeFileSync('flow.json', JSON.stringify(flows));
-		db.close();
+    		fs.writeFileSync('defaults/flow.json', JSON.stringify(flows));
+			db.close();
 	    });
 });

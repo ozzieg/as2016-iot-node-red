@@ -23,6 +23,6 @@
     "node-red-node-mongodb": "0.x",
     "node-red-contrib-postgres": "0.x",
     "node-red-contrib-librato": "3.0.2",
-    "node-red-contrib-particle": "0.0.x"
+    "node-red-contrib-particle": "./nodes/node-red-contrib-particle"
   }
 }
