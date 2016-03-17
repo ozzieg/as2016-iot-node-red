@@ -1,0 +1,272 @@
+<!--
+  Copyright 2015 Chuan Khoo (node-red-contrib-particle 0.0.2), including:
+    local cloud SSE (limited) support
+    renaming to Particle
+    configuration node implementation
+    reconfigured, clearer IN/OUT nodes
+
+  Copyright 2014 Krishnaraj Varma (node-red-contrib-sparkcore 0.0.12)
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+<!-- Particle CONFIGURATION node -->
+<script type="text/x-red" data-template-name="particle-cloud">
+    <div class="form-row">
+        <label for="node-config-input-host"><i class="fa fa-server"></i> Cloud URL</label>
+        <input class="input-append-left" type="text" id="node-config-input-host" placeholder="IP or hostname" style="width:40%;">
+        <label for="node-config-input-port" style="margin-left: 10px; width: 35px; "> Port</label>
+        <input type="text" id="node-config-input-port" placeholder="8080" style="width:45px">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-accesstoken"><i class="fa fa-key"></i> Access Token</label>
+        <input type="password" id="node-config-input-accesstoken">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-config-input-name" placeholder="Name">
+    </div>
+</script>
+<script type="text/javascript">
+    RED.nodes.registerType('particle-cloud',{
+        category: 'config',
+        defaults: {
+            host: {value:"https://api.particle.io",required:true},
+            port: {value:443,required:true,validate:RED.validators.number()},
+            name: {value:""}
+        },
+        credentials: {
+            accesstoken: {type: "password"}
+        },
+        label: function() {
+            return this.name || this.baseurl + ":" + this.port;
+        },
+    });
+</script>
+<!-- end Particle CONFIGURATION node -->
+
+
+<!-- Particle SSE input node -->
+<script type="text/x-red" data-template-name="ParticleSSE in">
+	<div class="form-row">
+        <label for="node-input-baseurl"><i class="fa fa-server"></i> Cloud URL</label>
+        <input type="text" id="node-input-baseurl">
+    </div>
+    <div class="form-row">
+        <label for="node-input-devid"><i class="fa fa-bullseye"></i> Device ID</label>
+        <input type="text" id="node-input-devid" placeholder="msg.devid; blank for firehose/local cloud">
+    </div>
+	<br/>
+	<div class="form-row">
+        <label for="node-input-evtname"><i class="icon-tag"></i> Event</label>
+        <input type="text" id="node-input-evtname" placeholder="msg.name">
+    </div>
+</script>
+<script type="text/x-red" data-help-name="ParticleSSE in">
+  <p><b>Particle SSE Input</b></p>
+	<p>
+    <p>This node allows you to listen to an incoming server-sent events (SSE) on the Particle cloud.</p>
+	  <p><i>Usage</i></p>
+	<p/>
+	<p><b>Subscribe to SSE</b></p>
+	<p><i>[required]</i>Enter name of the SSE in the Event editbox.</p>
+  <p><i>[optional]</i>Enter a device name or ID of the target Particle Device in the Device ID editbox.</p>
+  <p>Note that for local clouds, device-specific and device-and-event specific events are <a href="https://github.com/spark/spark-server/issues/53" target="_blank">currently <strong>not</strong> supported</a>. In this scenario, leave the <em>Device ID</em> and <em>Event Name</em> field empty, and you will get the public event firehose as specified in the <strong>Name</strong> field.</p> Filter this result in node-RED by writing your own function.
+	<p>The resulting <b>msg.raw</b> contains the raw return JSON string.</p>
+  <p><b>msg.evtname</b> contains the event name</p>
+  <p><b>msg.payload</b> contains the event data</p>
+  <p><b>msg.id</b> contains the device id that broadcasted the event</p>
+  <p><b>msg.published_at</b> contains the published date and time.</p>
+  <p>Sending input messages with <b>msg.name</b> allows changing of event name the node is subscribed to. However note that doing so will impact the settings defined in the dialog box.</p>
+  <p>For further info see the <a href="https://docs.particle.io/" target="_blank">Particle Docs website</a>.</p>
+</script>
+<script type="text/javascript">
+  RED.nodes.registerType('ParticleSSE in',{
+    category: 'Particle',
+    defaults: {
+		  baseurl: {value:"", type:"particle-cloud"},
+		  evtname: {value:"", required:true},
+      devid:   {value:""}
+    },
+    color:"#00ACED",
+    inputs:1,
+    outputs:1,
+    icon: "particle.png",
+    label: function() {
+      if (this.evtname === undefined || this.evtname === '') {    // node has not been set with event name
+        return "ParticleSSE";
+      } else {
+        if(this.devid === undefined || this.devid === '') {       // no device ID provided
+          return "SSE: " + this.evtname;
+        } else {
+          return "SSE (" + this.devid + "): " + this.evtname;
+        }
+      }
+    },
+    labelStyle: function() {
+      return this.evtname ? "":"node_label_italic";
+    },
+	  oneditprepare: function() {
+    },
+	  oneditsave: function() {
+    },
+    ondelete: function() {
+    }
+  });
+</script>
+<!-- end SSE input node -->
+
+
+<!-- Particle function call output node -->
+<script type="text/x-red" data-template-name="ParticleFunc out">
+	<div class="form-row">
+        <label for="node-input-baseurl"><i class="fa fa-server"></i> Cloud URL</label>
+        <input type="text" id="node-input-baseurl">
+  </div>
+  <div class="form-row">
+        <label for="node-input-devid"><i class="fa fa-bullseye"></i> Device ID</label>
+        <input type="text" id="node-input-devid" placeholder="Device ID">
+  </div>
+	<br/>
+	<div class="form-row">
+        <label for="node-input-fname"><i class="icon-tag"></i> Cloud Function</label>
+        <input type="text" id="node-input-fname" placeholder="msg.name">
+  </div>
+	<div class="form-row">
+        <label for="node-input-param"><i class="icon-tag"></i> Parameter</label>
+        <input type="text" id="node-input-param" placeholder="msg.payload">
+  </div>
+	<br/>
+  <div class="form-row">
+      <label>&nbsp;</label>
+      <input type="checkbox" id="node-input-once" style="display: inline-block; width: auto; vertical-align: top;">
+      <label for="node-input-once" style="width: 70%;">Call function on start?</label>
+  </div>
+	<br/>
+	<div class="form-row">
+        <label for="node-input-repeat"><i class="fa fa-repeat"></i> Repeat</label>
+        <input type="text" id="node-input-repeat" placeholder="msg.repeat">
+  </div>
+</script>
+<script type="text/x-red" data-help-name="ParticleFunc out">
+  <p><b>Particle Cloud Function Output</b></p>
+	<p>
+    <p>This node allows you to call a cloud function registered to a specific Particle Device on the Particle cloud.</p>
+	  <p><i>Usage</i></p>
+	<p/>
+  <p><i>[required]</i> Enter device name or ID where the cloud function originates from.</p>
+	<p><i>[required]</i> Enter the name of the Particle function in Function Name editbox and provide a (max) 63-byte string as parameter.</p>
+  <p>If a repeat interval is desired, enter a value (in seconds) to the Repeat editbox. 0 = no repeat<p>
+  <p>For further info see the <a href="https://docs.particle.io/" target="_blank">Particle Docs website</a>.</p>
+</script>
+<script type="text/javascript">
+  RED.nodes.registerType('ParticleFunc out',{
+    category: 'Particle',
+    defaults: {
+      baseurl: {value:"", type:"particle-cloud"},
+      devid: {value:"", required:true},
+      fname: {value:"", required:true},
+      param: {value:""},
+      once: {value:false},
+      repeat: {value:0}
+    },
+    color:"#00ACED",
+    inputs:1,
+    outputs:1,
+    icon: "particle.png",
+    label: function() {
+      if (this.fname === undefined || this.fname === '' || this.devid === undefined || this.devid === '') {    // node has not been set with required data
+        return "ParticleFunc";
+      } else {
+        return "func (" + this.devid + "): " + this.fname;
+      }
+    },
+    labelStyle: function() {
+      return this.fname ? "":"node_label_italic";
+    },
+    oneditprepare: function() {
+    },
+    oneditsave: function() {
+    },
+    ondelete: function() {
+    }
+  });
+</script>
+<!-- end Particle function call output node -->
+
+
+<!-- Particle variable call in+out node -->
+<script type="text/x-red" data-template-name="ParticleVar">
+	<div class="form-row">
+        <label for="node-input-baseurl"><i class="fa fa-server"></i> Cloud URL</label>
+        <input type="text" id="node-input-baseurl">
+    </div>
+    <div class="form-row">
+        <label for="node-input-devid"><i class="fa fa-bullseye"></i> Device ID</label>
+        <input type="text" id="node-input-devid" placeholder="Device ID">
+    </div>
+	<br/>
+	<div class="form-row">
+        <label for="node-input-getvar"><i class="icon-tag"></i> Device Variable Name</label>
+        <input type="text" id="node-input-getvar" placeholder="msg.name">
+    </div>
+	<br/>
+	<div class="form-row">
+        <label for="node-input-repeat"><i class="fa fa-repeat"></i> Repeat</label>
+        <input type="text" id="node-input-repeat" placeholder="msg.repeat">
+  </div>
+</script>
+<script type="text/x-red" data-help-name="ParticleVar">
+  <p><b>Particle Cloud Device Variable</b></p>
+	<p>
+    <p>This node allows you to retrieve a variable registered to a Particle cloud by a specific Particle Device.</p>
+	  <p><i>Usage</i></p>
+	<p/>
+  <p><i>[required]</i> Enter Device ID where the variable is registered.</p>
+	<p><i>[required]</i> Enter name of the variable in the Variable Name editbox.</p>
+  <p>If a repeat interval is desired, enter a value (in seconds) to the Repeat field. 0 = no repeat</p>
+  <p>For further info see the <a href="https://docs.particle.io/" target="_blank">Particle Docs website</a>.</p>
+</script>
+<script type="text/javascript">
+    RED.nodes.registerType('ParticleVar',{
+      category: 'Particle',
+      defaults: {
+        baseurl: {value:"", type:"particle-cloud"},
+        devid: {value:"", required:true},
+        getvar: {value:"", required:true},
+        repeat: {value:0}
+      },
+      color:"#00ACED",
+      inputs:1,
+      outputs:1,
+      icon: "particle.png",
+      label: function() {
+        if (this.getvar === undefined || this.getvar === '' || this.devid === undefined || this.devid === '') {    // node has not been set with required data
+          return "ParticleVar";
+        } else {
+          return "var (" + this.devid + "): " + this.getvar;
+        }
+      },
+      labelStyle: function() {
+        return this.getvar ? "":"node_label_italic";
+      },
+      oneditprepare: function() {
+      },
+      oneditsave: function() {
+      },
+      ondelete: function() {
+      }
+    });
+</script>
+<!-- end Particle variable call in+out node -->

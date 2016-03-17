@@ -1,0 +1,36 @@
+{
+	"name": "node-red-contrib-particle",
+	"version": "0.0.4",
+	"repository" : {
+		"type":"git",
+		"url":"https://github.com/chuank/node-red-contrib-particle"
+	},
+	"description": "Node-RED node to connect to Particle devices. Used to call functions, read variables or listen to Server-Sent Events (SSEs)",
+	"main": "particle.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"eventsource": "",
+		"request": "",
+		"querystring": ""
+	},
+	"node-red": {
+		"nodes": {
+			"particle": "particle/particle.js"
+		}
+	},
+	"keywords": [
+		"node-red",
+		"particle",
+		"core",
+		"photon",
+		"P1",
+		"node-red",
+		"iot",
+		"spark",
+		"device"
+	],
+	"author": "Chuan Khoo <khoo.chuan@gmail.com>",
+	"license": "ISC"
+}
