@@ -9,12 +9,15 @@ mongodb.connect(url, function(err, db) {
 
     var nodered = db.collection('nodered').findOne(
 	    {}, 
-	    {"flow":1}, 
+	    {"flow":1,"credentials":1}, 
 	    function(err, doc) {
      		if(err) return console.error(err);
 	   		var flows = doc.flow;
+	   		var credentials = doc.credentials;
     		console.log(flows);
+    		console.log(credentials);
     		fs.writeFileSync('defaults/flow.json', JSON.stringify(flows));
+    		fs.writeFileSync('defaults/flow_creds.json', JSON.stringify(credentials));
 			db.close();
 	    });
 });
