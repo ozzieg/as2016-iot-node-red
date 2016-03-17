@@ -10,6 +10,10 @@
   ],
   "website": "http://nodered.org/",
   "logo": "http://nodered.org/node-red.png",
+  "success_url": "/red",
+  "scripts": {
+    "postdeploy": "node export_flow.js"
+  },
   "env": {
     "NODE_RED_USERNAME": {
       "description": "Flow editor username",
