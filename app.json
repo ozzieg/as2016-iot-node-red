@@ -12,11 +12,6 @@
   "logo": "http://nodered.org/node-red.png",
   "success_url": "/red",
   "env": {
-    "PARTICLE_DEVICE_ID": {
-      "description": "Copy Device Id (24-digit alphanumeric) from command prompt by running 'particle list'",
-      "value": "123456789012345678901234",
-      "required": true
-    },
     "PARTICLE_ACCESS_TOKEN": {
       "description": "Copy the access token (40 character string) from command prompt by running 'particle token list'",
       "value": "1234567890123456789012345678901234567890",
