@@ -11,9 +11,6 @@
   "website": "http://nodered.org/",
   "logo": "http://nodered.org/node-red.png",
   "success_url": "/red",
-  "scripts": {
-    "postdeploy": "node -v"
-  },
   "env": {
     "NODE_RED_USERNAME": {
       "description": "Flow editor username",
@@ -23,31 +20,6 @@
     "NODE_RED_PASSWORD": {
       "description": "Flow editor password.",
       "value": "Pass",
-      "required": false
-    },
-    "POSTGRESDB_URL": {
-      "description": "Copy Hostname from DATABASE_URL Config Variable (postgres://<username>:password@<hostname>:<port>/<database-name>) leaving out the username and password (leave out postgres://, port number, and database name` at the end)",
-      "value": "host.amazonaws.com",
-      "required": false
-    },
-    "POSTGRESDB_DATABASE": {
-      "description": "Copy Database Name from DATABASE_URL Config Variable (postgres://<hostname>:<port>/<database-name>",
-      "value": "dbname",
-      "required": false
-    },
-    "MONGODB_URL": {
-      "description": "Copy Hostname from MONGOLAB_URI Config Variable (mongodb://<hostname>:<port>/<database-name>) including the username and password (leave out mongodb://, port number, and database name` at the end)",
-      "value": "user:pass@host.mlab.com",
-      "required": false
-    },
-    "MONGODB_PORT": {
-      "description": "Copy Port number from MONGOLAB_URI Config Variable (mongodb://<hostname>:<port>/<database-name>)",
-      "value": "12345",
-      "required": false
-    },
-    "MONGODB_DATABASE": {
-      "description": "Copy Database Name from MONGOLAB_URI Config Variable (mongodb://<hostname>:<port>/<database-name>",
-      "value": "dbname",
       "required": false
     },
     "PARTICLE_DEVICE_ID": {
