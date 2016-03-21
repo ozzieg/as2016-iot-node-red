@@ -167,6 +167,7 @@ function getFlows() {
                     defer.resolve(doc.flow);
                 } else {
                     //load default flow
+                    console.log("loading ./defaults/flow.json");
                     var flow = JSON.parse(fs.readFileSync('./defaults/flow.json','utf8'));
                     defer.resolve(flow);
                 }
@@ -206,8 +207,9 @@ function getCredentials() {
                     defer.resolve(jconv(doc.credentials));
                 } else {
                     //load default creds
+                    console.log("loading ./defaults/flow_creds.json");
                     var creds = JSON.parse(fs.readFileSync('./defaults/flow_creds.json','utf8'));
-                    defer.resolve(creds);
+                    defer.resolve(jconv(creds));
                 }
             }
         })
