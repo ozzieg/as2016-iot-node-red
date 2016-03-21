@@ -205,7 +205,9 @@ function getCredentials() {
                 if (doc && doc.credentials) {
                     defer.resolve(jconv(doc.credentials));
                 } else {
-                    defer.resolve({});
+                    //load default creds
+                    var creds = JSON.parse(fs.readFileSync('./defaults/flow_creds.json','utf8'));
+                    defer.resolve(creds);
                 }
             }
         })
